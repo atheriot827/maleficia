@@ -1,10 +1,7 @@
-
 import * as React from 'react';
-import { hot } from "react-hot-loader/root";
 
 interface Props {
-   name:
-    string
+   name: string;
 }
 
 class App extends React.Component<Props> {
@@ -20,4 +17,4 @@ class App extends React.Component<Props> {
   }
 }
 
-export default hot(App);
+export default App;
