@@ -77,11 +77,8 @@ module.exports = (env, argv) => {
       hot: true
     },
     plugins: [
-      new CopyPlugin({
-        patterns: [{ from: 'src/index.html' }],
-      }),
       new HtmlWebpackPlugin({
-        templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id="app"></div></body></html>',
+        template: './src/index.html',
         filename: 'index.html',
       }),
       new CleanWebpackPlugin(),
