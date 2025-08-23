@@ -42,13 +42,14 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 1;
+  background: rgba(255,255,255,0.2);
   mix-blend-mode: lighten;
-  opacity: 0.18;
+  opacity: 0.12;
   animation: lightning-flash 8s infinite;
 }
 
 @keyframes lightning-flash {
-  0%, 97%, 100% { opacity: 0.18; }
-  98% { opacity: 0.8; }
-  99% { opacity: 0.1; }
+  0%, 97%, 100% { opacity: 0.12; }
+  98% { opacity: 0.85; }
+  99% { opacity: 0.05; }
 }

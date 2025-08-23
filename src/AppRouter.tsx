@@ -4,11 +4,11 @@ import Home from "./pages/Home";
 import Books from "./pages/Books";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
-import TornadoBackground from "./components/TornadoBackground";
+import LightningOverlay from "./components/LightningOverlay";
 
 const AppRouter = () => (
   <Router>
-    <TornadoBackground />
+    <LightningOverlay />
     <div className="lightning" />
     <nav className="relative z-10 p-6 bg-black flex gap-8 justify-center border-b border-red-900 shadow-lg">
       <Link className="text-red-500 hover:text-red-300 text-xl font-bold transition-all duration-300" to="/">Home</Link>

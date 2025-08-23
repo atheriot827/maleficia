@@ -10,8 +10,9 @@ const TornadoBackground = () => (
       height: "100vh",
       zIndex: 0,
       pointerEvents: "none",
-      opacity: 0.15,
-      filter: "blur(1px)",
+      opacity: 0.35, // Increased opacity
+      filter: "blur(0.5px)",
+      transition: "opacity 0.5s",
     }}
   >
     <svg viewBox="0 0 400 600" width="100%" height="100%">
@@ -21,8 +22,8 @@ const TornadoBackground = () => (
           cy="100"
           rx="120"
           ry="30"
-          fill="#fff"
-          opacity="0.1"
+          fill="#ff0000"
+          opacity="0.13"
         >
           <animate
             attributeName="rx"
@@ -37,7 +38,7 @@ const TornadoBackground = () => (
           rx="90"
           ry="25"
           fill="#fff"
-          opacity="0.12"
+          opacity="0.18"
         >
           <animate
             attributeName="rx"
@@ -51,8 +52,8 @@ const TornadoBackground = () => (
           cy="300"
           rx="60"
           ry="18"
-          fill="#fff"
-          opacity="0.13"
+          fill="#ff0000"
+          opacity="0.16"
         >
           <animate
             attributeName="rx"
@@ -67,7 +68,7 @@ const TornadoBackground = () => (
           rx="30"
           ry="10"
           fill="#fff"
-          opacity="0.15"
+          opacity="0.22"
         >
           <animate
             attributeName="rx"
@@ -78,7 +79,7 @@ const TornadoBackground = () => (
         </ellipse>
       </g>
       <g>
-        <rect x="195" y="410" width="10" height="120" fill="#fff" opacity="0.08">
+        <rect x="195" y="410" width="10" height="120" fill="#ff0000" opacity="0.13">
           <animate
             attributeName="y"
             values="410;430;410"
