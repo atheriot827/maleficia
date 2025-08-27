@@ -74,12 +74,12 @@ module.exports = (env, argv) => {
       static: {
         directory: './dist'
       },
-      hot: true
+      hot: true,
+      proxy: {
+        '/api': 'http://localhost:3000',
+        '/contact': 'http://localhost:3000',
+      }
     },
-    proxy: {
-    '/api': 'http://localhost:3000',
-    '/contact': 'http://localhost:3000',
-  },
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
