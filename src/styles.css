@@ -1,53 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
-
 @import "tailwindcss";
 
-body {
+/* ---- Global look & feel (calm, modern, gothic-inspired) ---- */
+/* We keep the blackletter font only for logos/headings. Body uses system UI for readability. */
+:root{
+  --bg-0:#0b0b0f;          /* near-black */
+  --bg-1:#0f0f14;          /* panel surface */
+  --glass:rgba(255,255,255,.05); /* glass layer */
+  --border:rgba(255,255,255,.08);/* subtle border */
+}
+
+html,body{
+  height:100%;
+}
+
+body{
+  /* Subtle layered background: radial glow + vignette */
+  background:
+    radial-gradient(1200px 600px at 20% 0%, #111 0%, transparent 60%),
+    radial-gradient(900px 500px at 80% 100%, #15151b 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg-0), #09090b 70%);
+  color: #e5e7eb; /* slate-200 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility for headings in gothic font */
+.gothic {
   font-family: 'UnifrakturCook', cursive, serif;
-  background: linear-gradient(120deg, #000 70%, #2d0000 100%);
-  background-size: 200% 200%;
-  animation: gothic-bg 8s ease-in-out infinite;
+  letter-spacing: .04em;
 }
 
-@keyframes gothic-bg {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ---- Glass panel primitives ---- */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-.flicker {
-  animation: flicker 2s infinite;
+/* Focus ring polish for inputs/buttons on dark glass */
+:root {
+  --ring: 0 0 0 3px rgba(124,58,237,.25); /* violet-600 at 25% */
+}
+.focus-ring:focus {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  10% { opacity: 0.8; }
-  20% { opacity: 0.6; }
-  30% { opacity: 0.9; }
-  40% { opacity: 0.7; }
-  50% { opacity: 1; }
-  60% { opacity: 0.8; }
-  70% { opacity: 0.9; }
-  80% { opacity: 0.6; }
-  90% { opacity: 1; }
-}
-
-.lightning {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  background: rgba(255,255,255,0.2);
-  mix-blend-mode: lighten;
-  opacity: 0.12;
-  animation: lightning-flash 8s infinite;
-}
-
-@keyframes lightning-flash {
-  0%, 97%, 100% { opacity: 0.12; }
-  98% { opacity: 0.85; }
-  99% { opacity: 0.05; }
-}
+/* ---- Removed old flashy effects ---- */
+/* (Requested) Remove lightning overlay, flicker, and animated gradient. */
+/* If any old classes remain in components, they will now do nothing. */
