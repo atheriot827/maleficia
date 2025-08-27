@@ -1,19 +1,8 @@
-
-
-// server/index.js
-// =======================
-// Purpose: Minimal Express API for your author site.
-// - Serves the frontend build in production
-// - Stores blog comments/messages (in memory for now)
-// - Sends contact emails with Nodemailer (configure env vars)
-// =======================
-
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 
-// Optional: uncomment when you install nodemailer
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,12 +12,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 // Parse URL-encoded bodies (HTML form posts)
 app.use(express.urlencoded({ extended: false }));
-// Allow local dev from webpack dev server (proxy). Safe to keep.
+// Allow local dev from webpack dev server (proxy). 
 app.use(cors());
 
 // ---------- "Database" (training wheels) ----------
 // In-memory arrays (data disappears when the server restarts).
-// We'll swap these for a real DB later.
+// swap these for a real DB later.
 const comments = []; // { name, comment, postId, date }
 const messages = []; // { name, email, message, date }
 
@@ -85,30 +74,26 @@ app.post('/contact', async (req, res) => {
   console.log('[API] Contact message:', entry); // LOG
 
   // --- Email (enable after installing nodemailer) ---
-  // 1) npm i nodemailer
-  // 2) set environment variables:
-  //    AUTHOR_EMAIL=you@example.com
-  //    AUTHOR_APP_PASSWORD=your_smtp_or_app_password
-  // try {
-  //   const transporter = nodemailer.createTransport({
-  //     service: 'gmail',
-  //     auth: {
-  //       user: process.env.AUTHOR_EMAIL,
-  //       pass: process.env.AUTHOR_APP_PASSWORD,
-  //     },
-  //   });
-  //   const mailOptions = {
-  //     from: email,
-  //     to: process.env.AUTHOR_EMAIL,
-  //     subject: `New message from ${name} (Maleficia)`,
-  //     text: `${name} <${email}> wrote:\n\n${message}\n\n---\n${entry.date}`,
-  //   };
-  //   await transporter.sendMail(mailOptions);
-  //   console.log('[API] Contact email sent'); // LOG
-  // } catch (err) {
-  //   console.error('[API] Email error:', err.message);
-  //   return res.status(500).send('Failed to send message. Please try again later.');
-  // }
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.AUTHOR_EMAIL,
+        pass: process.env.AUTHOR_APP_PASSWORD,
+      },
+    });
+    const mailOptions = {
+      from: email,
+      to: process.env.AUTHOR_EMAIL,
+      subject: `New message from ${name} (Maleficia)`,
+      text: `${name} <${email}> wrote:\n\n${message}\n\n---\n${entry.date}`,
+    };
+    await transporter.sendMail(mailOptions);
+    console.log('[API] Contact email sent'); // LOG
+  } catch (err) {
+    console.error('[API] Email error:', err.message);
+    return res.status(500).send('Failed to send message. Please try again later.');
+  }
 
   // For now, even without email, confirm success
   res.status(200).send('Message received. (Email sending not yet enabled)');
