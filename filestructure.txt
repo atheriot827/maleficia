@@ -1,0 +1,38 @@
+|-- .babelrc
+|-- .gitignore
+|-- README.md
+|-- favicon_io
+    |-- android-chrome-192x192.png
+    |-- android-chrome-512x512.png
+    |-- apple-touch-icon.png
+    |-- favicon-16x16.png
+    |-- favicon-32x32.png
+    |-- favicon.ico
+    |-- site.webmanifest
+|-- my.test.js
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+|-- server
+    |-- index.js
+|-- src
+    |-- App.tsx
+    |-- AppRouter.tsx
+    |-- components
+        |-- BlogList.tsx
+        |-- BookList.tsx
+        |-- ContactForm.tsx
+        |-- Footer.tsx
+        |-- Header.tsx
+        |-- LightningOverlay.tsx
+        |-- TornadoBackground.tsx
+    |-- index.html
+    |-- index.tsx
+    |-- pages
+        |-- Blog.tsx
+        |-- Books.tsx
+        |-- Contact.tsx
+        |-- Home.tsx
+    |-- styles.css
+|-- tsconfig.json
+|-- webpack.config.js
