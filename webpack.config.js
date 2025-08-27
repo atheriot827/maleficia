@@ -72,13 +72,17 @@ module.exports = (env, argv) => {
     },
     devServer: {
       static: {
-        directory: './dist'
+        directory: path.resolve(__dirname, 'dist')
       },
       hot: true,
-      proxy: {
-        '/api': 'http://localhost:3000',
-        '/contact': 'http://localhost:3000',
-      }
+      proxy: [
+        {
+          context: ['/api', '/contact'],
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+          secure: false
+        }
+      ]
     },
     plugins: [
       new HtmlWebpackPlugin({
