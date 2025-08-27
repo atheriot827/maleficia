@@ -76,6 +76,10 @@ module.exports = (env, argv) => {
       },
       hot: true
     },
+    proxy: {
+    '/api': 'http://localhost:3000',
+    '/contact': 'http://localhost:3000',
+  },
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
