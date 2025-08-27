@@ -1,14 +1,22 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Home = () => (
-  <div className="p-8 flex flex-col items-center justify-center min-h-screen">
-    <h1 className="text-5xl font-bold mb-6 text-red-600 flicker" style={{ fontFamily: "'UnifrakturCook', cursive, serif" }}>
-      Welcome to the Author's Lair
-    </h1>
-    <p className="text-xl text-red-400 max-w-xl text-center">
-      Discover dark tales, haunting blogs, and reach out to the author from the shadows.
-    </p>
-  </div>
+  <section className="mx-auto max-w-5xl px-4 py-16">
+    <motion.div
+      className="glass p-10 text-center"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h1 className="gothic text-5xl md:text-6xl text-slate-100 mb-4">
+        Welcome to the Author&apos;s Lair
+      </h1>
+      <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+        Dark tales in a modern shell. Explore books, wander the blog, or send a message from the calm before the storm.
+      </p>
+    </motion.div>
+  </section>
 );
 
 export default Home;
