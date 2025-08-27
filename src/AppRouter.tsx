@@ -4,17 +4,19 @@ import Home from "./pages/Home";
 import Books from "./pages/Books";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
-import LightningOverlay from "./components/LightningOverlay";
 
 const AppRouter = () => (
   <Router>
-    <LightningOverlay />
-    <div className="lightning" />
-    <nav className="relative z-10 p-6 bg-black flex gap-8 justify-center border-b border-red-900 shadow-lg">
-      <Link className="text-red-500 hover:text-red-300 text-xl font-bold transition-all duration-300" to="/">Home</Link>
-      <Link className="text-red-500 hover:text-red-300 text-xl font-bold transition-all duration-300" to="/books">Books</Link>
-      <Link className="text-red-500 hover:text-red-300 text-xl font-bold transition-all duration-300" to="/blog">Blog</Link>
-      <Link className="text-red-500 hover:text-red-300 text-xl font-bold transition-all duration-300" to="/contact">Contact</Link>
+    <nav className="sticky top-0 z-20 mx-auto mt-4 max-w-5xl px-4">
+      <div className="glass flex items-center justify-between px-5 py-3">
+        <div className="gothic text-2xl text-slate-100">Michael S. Haralson</div>
+        <div className="flex gap-2">
+          <Link className="px-3 py-1.5 rounded-md hover:bg-white/10 transition" to="/">Home</Link>
+          <Link className="px-3 py-1.5 rounded-md hover:bg-white/10 transition" to="/books">Books</Link>
+          <Link className="px-3 py-1.5 rounded-md hover:bg-white/10 transition" to="/blog">Blog</Link>
+          <Link className="px-3 py-1.5 rounded-md hover:bg-white/10 transition" to="/contact">Contact</Link>
+        </div>
+      </div>
     </nav>
     <Routes>
       <Route path="/" element={<Home />} />
