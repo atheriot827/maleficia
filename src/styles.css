@@ -141,3 +141,50 @@ body{
   border: 1px solid color-mix(in oklch, #ff9900, white 30%);
 }
 .btn-amazon:hover { background: rgba(255,255,255,.08); }
+
+/* ---- Animated Clouds Background ---- */
+.clouds {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* content sits above */
+}
+
+.clouds-1,
+.clouds-2,
+.clouds-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 500px;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+}
+
+/* You can replace these URLs with /assets/clouds/*.png later */
+.clouds-1 {
+  background-image: url('https://s.cdpn.io/15514/clouds_1.png');
+  animation: clouds-loop-1 15s linear infinite;
+}
+.clouds-2 {
+  background-image: url('https://s.cdpn.io/15514/clouds_2.png');
+  animation: clouds-loop-2 20s linear infinite;
+}
+.clouds-3 {
+  background-image: url('https://s.cdpn.io/15514/clouds_3.png');
+  animation: clouds-loop-3 17s linear infinite;
+}
+
+@keyframes clouds-loop-1 { to { background-position: -1000px 0; } }
+@keyframes clouds-loop-2 { to { background-position: -1000px 0; } }
+@keyframes clouds-loop-3 { to { background-position: -1579px 0; } }
+
+/* Respect motion preferences and manual toggle */
+@media (prefers-reduced-motion: reduce) {
+  .clouds { display: none; }
+}
+
+[data-motion="reduced"] .clouds {
+  display: none;
+}

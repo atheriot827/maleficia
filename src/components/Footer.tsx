@@ -5,6 +5,24 @@ import PlaylistDialog from './PlaylistDialog';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
+  const [motionReduced, setMotionReduced] = React.useState(false);
+
+  React.useEffect(() => {
+    const saved = typeof window !== 'undefined' && localStorage.getItem('motion');
+    const reduced = saved === 'reduced';
+    setMotionReduced(reduced);
+    if (reduced) document.body.setAttribute('data-motion', 'reduced');
+  }, []);
+
+  React.useEffect(() => {
+    if (motionReduced) {
+      document.body.setAttribute('data-motion', 'reduced');
+      localStorage.setItem('motion', 'reduced');
+    } else {
+      document.body.removeAttribute('data-motion');
+      localStorage.setItem('motion', 'normal');
+    }
+  }, [motionReduced]);
 
   return (
     <footer className="mt-auto border-t border-white/10">
@@ -30,6 +48,13 @@ const Footer: React.FC = () => {
 
           <div className="flex items-center justify-center sm:justify-end gap-2">
             <PlaylistDialog />
+            <button
+              className="btn btn-ghost focus-ring text-sm"
+              onClick={() => setMotionReduced(v => !v)}
+              aria-pressed={motionReduced}
+            >
+              {motionReduced ? 'Enable Motion' : 'Reduce Motion'}
+            </button>
             {/* Optional tiny badge can be re-purposed. Remove if undesired. */}
             {/* <span className="badge-glass">Reading Mode</span> */}
           </div>
