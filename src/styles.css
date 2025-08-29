@@ -4,10 +4,28 @@
 /* ---- Global look & feel (calm, modern, gothic-inspired) ---- */
 /* We keep the blackletter font only for logos/headings. Body uses system UI for readability. */
 :root{
-  --bg-0:#0b0b0f;          /* near-black */
-  --bg-1:#0f0f14;          /* panel surface */
+  /* Base surfaces */
+  --bg-0:#0b0b0f;            /* near-black */
+  --bg-1:#0f0f14;            /* panel surface */
   --glass:rgba(255,255,255,.05); /* glass layer */
-  --border:rgba(255,255,255,.08);/* subtle border */
+  --border:rgba(255,255,255,.10);/* subtle border */
+
+  /* Brand (default: indigo) */
+  --brand:#4338ca;           /* indigo-700 */
+  --brand-contrast:#e0e7ff;  /* indigo-100 for text */
+  --accent:#06b6d4;          /* cyan-500 subtle accent */
+
+  /* Focus ring + states */
+  --ring-color: color-mix(in oklch, var(--brand), #ffffff 20%);
+  --ring: 0 0 0 3px color-mix(in oklch, var(--ring-color), transparent 70%);
+}
+
+/* Optional variant: crimson theme */
+/* Apply by adding data-theme="crimson" to <body> or <html> */
+[data-theme="crimson"]{
+  --brand:#b91c1c;           /* red-700 */
+  --brand-contrast:#fee2e2;  /* red-100 */
+  --accent:#fb7185;          /* rose-400 */
 }
 
 html,body{
@@ -42,9 +60,6 @@ body{
 }
 
 /* Focus ring polish for inputs/buttons on dark glass */
-:root {
-  --ring: 0 0 0 3px rgba(124,58,237,.25); /* violet-600 at 25% */
-}
 .focus-ring:focus {
   outline: none;
   box-shadow: var(--ring);
@@ -53,3 +68,42 @@ body{
 /* ---- Removed old flashy effects ---- */
 /* (Requested) Remove lightning overlay, flicker, and animated gradient. */
 /* If any old classes remain in components, they will now do nothing. */
+
+/* ---- Design primitives: buttons, inputs, links, badges ---- */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-md transition select-none;
+}
+.btn-primary {
+  color: var(--brand-contrast);
+  background: color-mix(in oklch, var(--brand), black 10%);
+  border: 1px solid color-mix(in oklch, var(--brand), white 20%);
+}
+.btn-primary:hover { background: color-mix(in oklch, var(--brand), black 20%); }
+.btn-ghost {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: #e5e7eb;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.08); }
+
+.input {
+  @apply w-full p-2 rounded-md text-black;
+}
+
+.link {
+  color: var(--brand-contrast);
+  text-decoration-color: color-mix(in oklch, var(--brand), white 30%);
+  text-decoration-thickness: .08em;
+  text-underline-offset: 3px;
+}
+.link:hover { color: white; }
+
+.badge-glass {
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 2px 8px;
+  color: var(--brand-contrast);
+  font-size: 12px;
+  letter-spacing: .02em;
+}
