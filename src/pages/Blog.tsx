@@ -77,16 +77,16 @@ const Blog: React.FC = () => {
 
           <form onSubmit={onSubmit} className="mt-2">
             <input
-              className="w-full mb-2 p-2 text-black rounded focus-ring"
+              className="input mb-2 focus-ring"
               type="text" placeholder="Your name"
               value={name} onChange={e => setName(e.target.value)} required
             />
             <textarea
-              className="w-full mb-2 p-2 text-black rounded focus-ring"
+              className="input mb-2 focus-ring"
               placeholder="Your comment"
               value={comment} onChange={e => setComment(e.target.value)} required
             />
-            <button className="px-4 py-2 rounded bg-white/10 hover:bg-white/20 transition focus-ring" type="submit">
+            <button className="btn btn-primary focus-ring" type="submit">
               Post Comment
             </button>
           </form>

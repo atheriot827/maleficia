@@ -35,16 +35,16 @@ const Contact: React.FC = () => {
       <div className="glass p-6">
         <h2 className="text-3xl font-bold mb-6 text-slate-100">Contact the Author</h2>
         <form onSubmit={onSubmit}>
-          <label className="block mb-1 text-slate-300">Your Name</label>
-          <input className="w-full mb-3 p-2 text-black rounded focus-ring" value={name} onChange={e=>setName(e.target.value)} required />
+          <label className="block mb-1 text-slate-300" htmlFor="name">Your Name</label>
+          <input id="name" className="input mb-3 focus-ring" value={name} onChange={e=>setName(e.target.value)} required />
 
-          <label className="block mb-1 text-slate-300">Your Email</label>
-          <input className="w-full mb-3 p-2 text-black rounded focus-ring" type="email" value={email} onChange={e=>setEmail(e.target.value)} required />
+          <label className="block mb-1 text-slate-300" htmlFor="email">Your Email</label>
+          <input id="email" className="input mb-3 focus-ring" type="email" value={email} onChange={e=>setEmail(e.target.value)} required />
 
-          <label className="block mb-1 text-slate-300">Message</label>
-          <textarea className="w-full mb-4 p-2 text-black rounded focus-ring" rows={5} value={message} onChange={e=>setMessage(e.target.value)} required />
+          <label className="block mb-1 text-slate-300" htmlFor="message">Message</label>
+          <textarea id="message" className="input mb-4 focus-ring" rows={5} value={message} onChange={e=>setMessage(e.target.value)} required />
 
-          <button className="w-full py-2 rounded bg-white/10 hover:bg-white/20 transition focus-ring" type="submit">Send Message</button>
+          <button className="btn btn-primary w-full focus-ring" type="submit">Send Message</button>
           <p className="mt-3 text-sm text-slate-400 min-h-[1.25rem]">{status}</p>
         </form>
       </div>
