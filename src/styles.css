@@ -165,15 +165,15 @@ body{
 /* You can replace these URLs with /assets/clouds/*.png later */
 .clouds-1 {
   background-image: url('https://s.cdpn.io/15514/clouds_1.png');
-  animation: clouds-loop-1 15s linear infinite;
+  animation: clouds-loop-1 var(--cloud1-duration) linear infinite;
 }
 .clouds-2 {
   background-image: url('https://s.cdpn.io/15514/clouds_2.png');
-  animation: clouds-loop-2 20s linear infinite;
+  animation: clouds-loop-2 var(--cloud2-duration) linear infinite;
 }
 .clouds-3 {
   background-image: url('https://s.cdpn.io/15514/clouds_3.png');
-  animation: clouds-loop-3 17s linear infinite;
+  animation: clouds-loop-3 var(--cloud3-duration) linear infinite;
 }
 
 @keyframes clouds-loop-1 { to { background-position: -1000px 0; } }
@@ -187,4 +187,10 @@ body{
 
 [data-motion="reduced"] .clouds {
   display: none;
+}
+/* Adjustable speeds for clouds */
+:root {
+  --cloud1-duration: 45s; /* was 15s */
+  --cloud2-duration: 60s; /* was 20s */
+  --cloud3-duration: 54s; /* was 17s */
 }
