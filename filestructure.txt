@@ -22,8 +22,11 @@
             |-- book1.jpg
             |-- book2.jpg
             |-- book3.jpg
+        |-- clouds
+            |-- .gitkeep
         |-- logo
             |-- moonfire-logo.png
+            |-- msh.png
 |-- server
     |-- index.js
 |-- src
@@ -32,12 +35,12 @@
     |-- components
         |-- BlogList.tsx
         |-- BookList.tsx
+        |-- CloudsBackground.tsx
         |-- ContactForm.tsx
         |-- Footer.tsx
         |-- Header.tsx
         |-- LightningOverlay.tsx
         |-- PlaylistDialog.tsx
-        |-- TornadoBackground.tsx
     |-- index.html
     |-- index.tsx
     |-- pages
