@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+/* Fonts: Inter for body, Cinzel for display headings */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap');
 @import "tailwindcss";
 
 /* ---- Global look & feel (calm, modern, gothic-inspired) ---- */
@@ -39,14 +40,15 @@ body{
     radial-gradient(900px 500px at 80% 100%, #15151b 0%, transparent 55%),
     linear-gradient(180deg, var(--bg-0), #09090b 70%);
   color: #e5e7eb; /* slate-200 */
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Utility for headings in gothic font */
 .gothic {
-  font-family: 'UnifrakturCook', cursive, serif;
-  letter-spacing: .04em;
+  font-family: 'Cinzel', serif;
+  letter-spacing: .02em;
 }
 
 /* ---- Glass panel primitives ---- */
@@ -107,3 +109,35 @@ body{
   font-size: 12px;
   letter-spacing: .02em;
 }
+
+/* Book card subtle "spine" accent */
+.book-card {
+  position: relative;
+}
+.book-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+  border-right: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+/* Ensure inner flipping surfaces follow the parent corner radius */
+.book-surface {
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* Amazon CTA variant: keep glass background with brand accent */
+.btn-amazon {
+  color: #ff9900; /* Amazon orange */
+  background: var(--glass);
+  border: 1px solid color-mix(in oklch, #ff9900, white 30%);
+}
+.btn-amazon:hover { background: rgba(255,255,255,.08); }
