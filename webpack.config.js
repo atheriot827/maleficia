@@ -90,6 +90,12 @@ module.exports = (env, argv) => {
         filename: 'index.html',
       }),
       new CleanWebpackPlugin(),
+      new CopyPlugin({
+        patterns: [
+          { from: path.resolve(__dirname, 'public'), to: '.' , noErrorOnMissing: true },
+          { from: path.resolve(__dirname, 'favicon_io'), to: '.', noErrorOnMissing: true },
+        ],
+      }),
       isDevelopment && new ReactRefreshWebpackPlugin()
     ].filter(Boolean),
     resolve: {
