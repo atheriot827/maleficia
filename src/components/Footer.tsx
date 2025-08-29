@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Github, Mail, Twitter } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
+import { SiSpotify, SiApplemusic } from 'react-icons/si';
+import PlaylistDialog from './PlaylistDialog';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -7,31 +9,30 @@ const Footer: React.FC = () => {
   return (
     <footer className="mt-auto border-t border-white/10">
       <div className="mx-auto max-w-5xl px-4">
-        <div className="glass my-6 px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+        <div className="glass my-6 px-5 py-4 flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <span className="text-sm text-slate-400">© {year} Michael S. Haralson</span>
-            <span className="badge-glass">Gothic + Glass</span>
+            <div className="flex items-center gap-3" aria-label="Social links">
+              <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://www.facebook.com/profile.php?id=100092259976470" target="_blank" rel="noreferrer noopener" aria-label="Facebook">
+                <Facebook size={18} className="text-slate-300" />
+              </a>
+              <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://www.instagram.com/samspade685/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+                <Instagram size={18} className="text-slate-300" />
+              </a>
+              <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://open.spotify.com/playlist/30qYKjnuabeFZUuZ5cs46z?si=hG8mIK6lS2CwKEE0IzH2Vw&nd=1&dlsi=abfa39d97eaf4cab" target="_blank" rel="noreferrer noopener" aria-label="Spotify">
+                <SiSpotify size={18} className="text-slate-300" />
+              </a>
+              <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://music.apple.com/us/playlist/birthrite/pl.u-V9D7v0aI1Mdra3" target="_blank" rel="noreferrer noopener" aria-label="Apple Music">
+                <SiApplemusic size={18} className="text-slate-300" />
+              </a>
+            </div>
           </div>
 
-          <nav aria-label="Social links">
-            <ul className="flex items-center gap-3">
-              <li>
-                <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://twitter.com" target="_blank" rel="noreferrer noopener" aria-label="Twitter">
-                  <Twitter size={18} className="text-slate-300" />
-                </a>
-              </li>
-              <li>
-                <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://github.com" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
-                  <Github size={18} className="text-slate-300" />
-                </a>
-              </li>
-              <li>
-                <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="mailto:author@example.com" aria-label="Email">
-                  <Mail size={18} className="text-slate-300" />
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <div className="flex items-center justify-center sm:justify-end gap-2">
+            <PlaylistDialog />
+            {/* Optional tiny badge can be re-purposed. Remove if undesired. */}
+            {/* <span className="badge-glass">Reading Mode</span> */}
+          </div>
         </div>
       </div>
     </footer>
