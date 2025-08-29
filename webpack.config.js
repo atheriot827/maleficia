@@ -35,7 +35,8 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                importLoaders: 1
+                importLoaders: 1,
+                url: false // leave url() paths as-is so we can serve /assets/* from public
               }
             },
             'postcss-loader'
