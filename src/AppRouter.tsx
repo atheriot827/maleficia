@@ -7,12 +7,14 @@ import Books from "./pages/Books";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
+import CloudsBackground from "./components/CloudsBackground";
 
 const AppRouter: React.FC = () => {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
-        <nav className="sticky top-0 z-20 mx-auto mt-4 max-w-5xl px-4 w-full">
+      <CloudsBackground />
+      <nav className="sticky top-0 z-20 mx-auto mt-4 max-w-5xl px-4 w-full">
           <div className="glass flex items-center justify-between px-5 py-3">
             <NavLink to="/" className="flex items-center gap-3">
               <img src="/assets/logo/moonfire-logo.png" alt="Michael S. Haralson logo" className="h-8 w-auto" />
