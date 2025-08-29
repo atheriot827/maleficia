@@ -18,6 +18,12 @@
     |-- .gitkeep
     |-- assets
         |-- .gitkeep
+        |-- books
+            |-- book1.jpg
+            |-- book2.jpg
+            |-- book3.jpg
+        |-- logo
+            |-- moonfire-logo.png
 |-- server
     |-- index.js
 |-- src
@@ -30,6 +36,7 @@
         |-- Footer.tsx
         |-- Header.tsx
         |-- LightningOverlay.tsx
+        |-- PlaylistDialog.tsx
         |-- TornadoBackground.tsx
     |-- index.html
     |-- index.tsx
