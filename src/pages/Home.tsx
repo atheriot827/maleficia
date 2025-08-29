@@ -9,7 +9,7 @@ const Home = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <img src="/assets/logo/moonfire-logo.png" alt="Michael S. Haralson logo" className="h-16 md:h-20 w-auto mx-auto mb-4 opacity-90" />
+      <img src="/assets/logo/msh.png" alt="Michael S. Haralson logo" className="h-20 md:h-24 w-auto mx-auto mb-4 opacity-90" />
       <h1 className="gothic text-5xl md:text-6xl text-slate-100 mb-4">
         Welcome to the Author&apos;s Lair
       </h1>
