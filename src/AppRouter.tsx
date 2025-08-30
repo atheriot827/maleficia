@@ -12,7 +12,7 @@ import CloudsBackground from "./components/CloudsBackground";
 const AppRouter: React.FC = () => {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="relative z-10 min-h-screen flex flex-col">
       <CloudsBackground />
       <nav className="sticky top-0 z-20 mx-auto mt-4 max-w-5xl px-4 w-full">
           <div className="glass flex items-center justify-between px-5 py-3">

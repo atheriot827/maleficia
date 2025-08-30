@@ -53,11 +53,14 @@ body{
 
 /* ---- Glass panel primitives ---- */
 .glass {
-  background: var(--glass);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
+  /* Slightly frosted panel with gentle tint */
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 1rem; /* rounded-2xl */
+  background-clip: padding-box; /* keep border crisp */
+  isolation: isolate; /* ensure proper backdrop composition */
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
@@ -148,8 +151,10 @@ body{
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0; /* content sits above */
+  z-index: 0; /* behind app content */
 }
+
+/* lightning overlay styles removed (component unmounted) */
 
 .clouds-1,
 .clouds-2,
@@ -190,14 +195,41 @@ body{
   display: none;
 }
 
+/* Storm tint overlay (seafoam glow) */
+:root {
+  --storm-tint-alpha: 0.36;                 /* overall intensity (stronger) */
+  --storm-seafoam-1: 95 158 160;            /* CadetBlue #5F9EA0 */
+  --storm-seafoam-2: 110 178 180;           /* lighter accent of CadetBlue */
+  --storm-blue-1: 90 170 255;               /* soft sky blue */
+  --storm-blue-2: 110 190 255;              /* accent blue */
+}
+.clouds::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* layered seafoam glows + stronger vertical wash */
+  background:
+    radial-gradient(80% 55% at 30% 6%,  rgb(var(--storm-blue-1) / calc(var(--storm-tint-alpha) * .14)), transparent 68%),
+    radial-gradient(80% 55% at 70% 8%,  rgb(var(--storm-blue-2) / calc(var(--storm-tint-alpha) * .12)), transparent 70%),
+    radial-gradient(160% 90% at 50% 0%, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * 1.2)), transparent 78%),
+    radial-gradient(100% 60% at 15% 18%, rgb(var(--storm-seafoam-2) / calc(var(--storm-tint-alpha) * 1.1)), transparent 70%),
+    radial-gradient(100% 60% at 85% 14%, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * 1.0)), transparent 70%),
+    linear-gradient(180deg, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * .60)), transparent);
+  /* preserve cloud luminance; apply only color tint */
+  background-blend-mode: normal;
+  mix-blend-mode: color;
+  filter: saturate(210%);
+}
+
 /* ---- Book 3D Flip (requested structure) ---- */
 .book-card.no-spine::before { display: none; }
 .perspective { position: relative; z-index: 1; width: 100%; height: 100%; perspective: 1000px; transform-style: preserve-3d; }
 .book-wrap { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .6s ease-out; border-radius: inherit; }
 .book { position: absolute; inset: 0; background-size: cover; background-position: center; border-radius: inherit; backface-visibility: hidden; cursor: pointer; box-shadow: 0 12px 28px rgba(0,0,0,.35); }
-.title { position: absolute; left: -4px; top: 0; bottom: 0; width: 28px; background: var(--brand); transform: rotateY(-80deg) translateX(-10px); border-top-left-radius: 10px; border-bottom-left-radius: 10px; opacity: .9; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.title { position: absolute; left: -4px; top: 0; bottom: 0; width: 28px; background: var(--brand); transform: rotateY(-80deg) translateX(-10px); border-top-left-radius: 10px; border-bottom-left-radius: 10px; opacity: 1; pointer-events: none; display: flex; align-items: center; justify-content: center; }
 .title .spine-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--brand-contrast); text-shadow: 0 1px 2px rgba(0,0,0,.6); opacity: .95; }
-.book-back { position: absolute; inset: 0; background: rgba(0,0,0,.6); color: #e5e7eb; border-radius: inherit; backface-visibility: hidden; transform: rotateY(180deg); display: flex; flex-direction: column; padding: 20px; box-shadow: 0 12px 28px rgba(0,0,0,.35); }
+.book-back { position: absolute; inset: 0; background: #0f0f14; color: #e5e7eb; border-radius: inherit; backface-visibility: hidden; transform: rotateY(180deg); display: flex; flex-direction: column; padding: 20px; box-shadow: 0 12px 28px rgba(0,0,0,.35); }
 .book-back .text { transform: rotateX(0); text-align: left; overflow: auto; }
 .book-wrap.rotate { transform: rotateY(12deg); }
 .book-wrap.flip { transform: rotateY(180deg); }
