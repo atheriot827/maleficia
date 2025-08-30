@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { motion } from 'framer-motion';
 
 type Comment = { name: string; comment: string; date?: string };
 
@@ -44,12 +43,7 @@ const Blog: React.FC = () => {
   }
 
   return (
-    <motion.section
-      className="mx-auto max-w-2xl px-4 py-10"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <section className="mx-auto max-w-2xl px-4 py-10">
       <div className="glass p-6 mb-6">
         <h2 className="text-3xl font-bold mb-2 text-slate-100">Blog</h2>
         <p className="text-slate-400">Latest thoughts from the stormfront.</p>
@@ -92,7 +86,7 @@ const Blog: React.FC = () => {
           </form>
         </div>
       </article>
-    </motion.section>
+    </section>
   );
 };
 

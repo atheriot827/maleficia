@@ -1,6 +1,5 @@
 // src/pages/Contact.tsx
 import * as React from 'react';
-import { motion } from 'framer-motion';
 
 const Contact: React.FC = () => {
   const [name, setName] = React.useState('');
@@ -26,12 +25,7 @@ const Contact: React.FC = () => {
   }
 
   return (
-    <motion.section
-      className="mx-auto max-w-md px-4 py-10"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <section className="mx-auto max-w-md px-4 py-10">
       <div className="glass p-6">
         <h2 className="text-3xl font-bold mb-6 text-slate-100">Contact the Author</h2>
         <form onSubmit={onSubmit}>
@@ -48,7 +42,7 @@ const Contact: React.FC = () => {
           <p className="mt-3 text-sm text-slate-400 min-h-[1.25rem]">{status}</p>
         </form>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

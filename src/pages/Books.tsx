@@ -1,7 +1,6 @@
 // src/pages/Books.tsx
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { SiAmazon } from 'react-icons/si';
 
 type Book = {
@@ -42,12 +41,7 @@ const books: Book[] = [
 
 const Books: React.FC = () => {
   return (
-    <motion.section
-      className="mx-auto max-w-5xl px-4 py-10"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <section className="mx-auto max-w-5xl px-4 py-10">
       <div className="glass p-6 mb-8">
         <h2 className="text-3xl font-bold mb-2 text-slate-100">Books</h2>
         <p className="text-slate-400">Hover or tap a book to flip it.</p>
@@ -58,7 +52,7 @@ const Books: React.FC = () => {
           <BookCard key={b.title} book={b} />
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 };
 
