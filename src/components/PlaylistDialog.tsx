@@ -2,18 +2,28 @@ import * as React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Headphones } from 'lucide-react';
 
-const PlaylistDialog: React.FC = () => {
+type Props = {
+  label?: string;
+  buttonClassName?: string;
+  iconSize?: number;
+};
+
+const PlaylistDialog: React.FC<Props> = ({
+  label = 'Birthrite Playlists',
+  buttonClassName = 'btn btn-ghost focus-ring inline-flex items-center gap-2',
+  iconSize = 16,
+}) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="btn btn-ghost focus-ring inline-flex items-center gap-2" aria-haspopup="dialog">
-          <Headphones size={16} />
-          Birthrite Playlists
+        <button className={buttonClassName} aria-haspopup="dialog">
+          <Headphones size={iconSize} />
+          {label}
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 glass p-4 w-[95vw] max-w-4xl max-h-[85vh] overflow-auto">
+        <Dialog.Overlay className="fixed inset-0 bg-black/60 z-[100]" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 glass p-4 w-[95vw] max-w-4xl max-h-[85vh] overflow-auto z-[110]">
           <div className="flex items-start justify-between mb-3">
             <Dialog.Title className="text-xl font-semibold">Birthrite Playlists</Dialog.Title>
             <Dialog.Close className="btn btn-ghost focus-ring">Close</Dialog.Close>
@@ -58,4 +68,3 @@ const PlaylistDialog: React.FC = () => {
 };
 
 export default PlaylistDialog;
-

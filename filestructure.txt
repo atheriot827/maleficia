@@ -27,7 +27,15 @@
         |-- logo
             |-- moonfire-logo.png
             |-- msh.png
+        |-- trailers
+            |-- Birthrite Trailer 1.mp4
+            |-- Birthrite ad 1.mp4
+            |-- Birthrite ad 2.mp4
+            |-- Birthrite ad 3.mp4
+            |-- Birthrite ad 4.mp4
 |-- server
+    |-- data
+        |-- subscribers.json
     |-- index.js
 |-- src
     |-- App.tsx

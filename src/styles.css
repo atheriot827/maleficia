@@ -198,10 +198,11 @@ body{
 /* Storm tint overlay (seafoam glow) */
 :root {
   --storm-tint-alpha: 0.36;                 /* overall intensity (stronger) */
-  --storm-seafoam-1: 95 158 160;            /* CadetBlue #5F9EA0 */
-  --storm-seafoam-2: 110 178 180;           /* lighter accent of CadetBlue */
-  --storm-blue-1: 90 170 255;               /* soft sky blue */
-  --storm-blue-2: 110 190 255;              /* accent blue */
+  /* Shift toward a greener seafoam, slightly de-emphasize blue */
+  --storm-seafoam-1: 88 160 120;            /* #58A078 (greener, moody teal) */
+  --storm-seafoam-2: 102 180 140;           /* #66B48C (lighter seafoam) */
+  --storm-blue-1: 70 150 200;               /* softened blue */
+  --storm-blue-2: 85 170 220;               /* accent blue */
 }
 .clouds::after {
   content: "";
@@ -210,16 +211,18 @@ body{
   pointer-events: none;
   /* layered seafoam glows + stronger vertical wash */
   background:
-    radial-gradient(80% 55% at 30% 6%,  rgb(var(--storm-blue-1) / calc(var(--storm-tint-alpha) * .14)), transparent 68%),
-    radial-gradient(80% 55% at 70% 8%,  rgb(var(--storm-blue-2) / calc(var(--storm-tint-alpha) * .12)), transparent 70%),
-    radial-gradient(160% 90% at 50% 0%, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * 1.2)), transparent 78%),
-    radial-gradient(100% 60% at 15% 18%, rgb(var(--storm-seafoam-2) / calc(var(--storm-tint-alpha) * 1.1)), transparent 70%),
-    radial-gradient(100% 60% at 85% 14%, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * 1.0)), transparent 70%),
-    linear-gradient(180deg, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * .60)), transparent);
+    /* reduce blue a touch */
+    radial-gradient(80% 55% at 30% 6%,  rgb(var(--storm-blue-1) / calc(var(--storm-tint-alpha) * .10)), transparent 68%),
+    radial-gradient(80% 55% at 70% 8%,  rgb(var(--storm-blue-2) / calc(var(--storm-tint-alpha) * .08)), transparent 70%),
+    /* increase green seafoam weight slightly */
+    radial-gradient(160% 90% at 50% 0%, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * 1.30)), transparent 78%),
+    radial-gradient(100% 60% at 15% 18%, rgb(var(--storm-seafoam-2) / calc(var(--storm-tint-alpha) * 1.20)), transparent 70%),
+    radial-gradient(100% 60% at 85% 14%, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * 1.10)), transparent 70%),
+    linear-gradient(180deg, rgb(var(--storm-seafoam-1) / calc(var(--storm-tint-alpha) * .68)), transparent);
   /* preserve cloud luminance; apply only color tint */
   background-blend-mode: normal;
   mix-blend-mode: color;
-  filter: saturate(210%);
+  filter: saturate(190%);
 }
 
 /* ---- Book 3D Flip (requested structure) ---- */
@@ -236,6 +239,17 @@ body{
 
 /* Subtle under-book shadow (not affected by flip) */
 .book-shadow { position: absolute; left: 10%; right: 10%; bottom: 10px; height: 14px; z-index: 0; background: radial-gradient(50% 60% at 50% 50%, rgba(0,0,0,.35), rgba(0,0,0,0)); filter: blur(2px); }
+
+/* Featured book gentle tilt animation */
+.feature-tilt { animation: book-feature-tilt 6s ease-in-out infinite; transform-origin: 20% 50%; }
+@keyframes book-feature-tilt {
+  0% { transform: rotateY(8deg); }
+  50% { transform: rotateY(12deg); }
+  100% { transform: rotateY(8deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feature-tilt { animation: none; }
+}
 /* Adjustable speeds for clouds */
 :root {
   --cloud1-duration: 45s; /* was 15s */

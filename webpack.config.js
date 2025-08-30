@@ -94,7 +94,9 @@ module.exports = (env, argv) => {
       new CopyPlugin({
         patterns: [
           { from: path.resolve(__dirname, 'public'), to: '.' , noErrorOnMissing: true },
+          // Copy new favicon bundle (handles either folder name)
           { from: path.resolve(__dirname, 'favicon_io'), to: '.', noErrorOnMissing: true },
+          { from: path.resolve(__dirname, 'favicon_io (1)'), to: '.', noErrorOnMissing: true },
         ],
       }),
       isDevelopment && new ReactRefreshWebpackPlugin()

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { SiSpotify, SiApplemusic } from 'react-icons/si';
-import PlaylistDialog from './PlaylistDialog';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -32,22 +31,21 @@ const Footer: React.FC = () => {
             <span className="text-sm text-slate-400">© {year} Michael S. Haralson</span>
             <div className="flex items-center gap-3" aria-label="Social links">
               <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://www.facebook.com/profile.php?id=100092259976470" target="_blank" rel="noreferrer noopener" aria-label="Facebook">
-                <Facebook size={18} className="text-slate-300" />
+                <Facebook size={24} className="text-slate-300" />
               </a>
               <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://www.instagram.com/samspade685/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
-                <Instagram size={18} className="text-slate-300" />
+                <Instagram size={24} className="text-slate-300" />
               </a>
               <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://open.spotify.com/playlist/30qYKjnuabeFZUuZ5cs46z?si=hG8mIK6lS2CwKEE0IzH2Vw&nd=1&dlsi=abfa39d97eaf4cab" target="_blank" rel="noreferrer noopener" aria-label="Spotify">
-                <SiSpotify size={18} className="text-slate-300" />
+                <SiSpotify size={24} className="text-slate-300" />
               </a>
               <a className="p-2 rounded-md hover:bg-white/10 focus-ring" href="https://music.apple.com/us/playlist/birthrite/pl.u-V9D7v0aI1Mdra3" target="_blank" rel="noreferrer noopener" aria-label="Apple Music">
-                <SiApplemusic size={18} className="text-slate-300" />
+                <SiApplemusic size={24} className="text-slate-300" />
               </a>
             </div>
           </div>
 
           <div className="flex items-center justify-center sm:justify-end gap-2">
-            <PlaylistDialog />
             <button
               className="btn btn-ghost focus-ring text-sm"
               onClick={() => setMotionReduced(v => !v)}

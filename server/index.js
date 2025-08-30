@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const cors = require('cors');
 
 const nodemailer = require('nodemailer');
@@ -20,6 +21,37 @@ app.use(cors());
 // swap these for a real DB later.
 const comments = []; // { name, comment, postId, date }
 const messages = []; // { name, email, message, date }
+let subscribers = []; // loaded from disk
+
+// Persist newsletter subscribers to disk (basic, replace with real provider later)
+const DATA_DIR = path.join(__dirname, 'data');
+const SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
+
+function ensureDataDir() {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!fs.existsSync(SUBSCRIBERS_FILE)) fs.writeFileSync(SUBSCRIBERS_FILE, '[]', 'utf8');
+}
+
+function loadSubscribers() {
+  try {
+    ensureDataDir();
+    const raw = fs.readFileSync(SUBSCRIBERS_FILE, 'utf8');
+    subscribers = JSON.parse(raw);
+  } catch (e) {
+    console.error('[API] Failed to load subscribers:', e.message);
+    subscribers = [];
+  }
+}
+
+function saveSubscribers() {
+  try {
+    fs.writeFileSync(SUBSCRIBERS_FILE, JSON.stringify(subscribers, null, 2), 'utf8');
+  } catch (e) {
+    console.error('[API] Failed to save subscribers:', e.message);
+  }
+}
+
+loadSubscribers();
 
 // ---------- Routes ----------
 
@@ -59,6 +91,23 @@ app.post('/api/comments', (req, res) => {
 
   // Respond with what we stored
   res.status(201).json(item);
+});
+
+// Newsletter subscribe (file-based)
+app.post('/api/newsletter/subscribe', (req, res) => {
+  const { email } = req.body || {};
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).send('A valid email is required.');
+  }
+  const existing = subscribers.find(s => s.email.toLowerCase() === email.toLowerCase());
+  if (existing) {
+    return res.status(200).send('Already subscribed.');
+  }
+  const sub = { email, createdAt: new Date().toISOString() };
+  subscribers.push(sub);
+  saveSubscribers();
+  console.log('[API] Newsletter subscribed:', sub);
+  return res.status(201).send('Subscribed.');
 });
 
 // Contact (store + email)
