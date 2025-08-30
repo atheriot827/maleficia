@@ -40,6 +40,7 @@
         |-- Footer.tsx
         |-- Header.tsx
         |-- LightningOverlay.tsx
+        |-- LightningStrikes.tsx
         |-- PlaylistDialog.tsx
     |-- index.html
     |-- index.tsx
