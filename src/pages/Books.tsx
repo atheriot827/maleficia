@@ -50,10 +50,10 @@ const Books: React.FC = () => {
     >
       <div className="glass p-6 mb-8">
         <h2 className="text-3xl font-bold mb-2 text-slate-100">Books</h2>
-        <p className="text-slate-400">Hover a book to reveal its description.</p>
+        <p className="text-slate-400">Hover or tap a book to flip it.</p>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {books.map((b) => (
           <BookCard key={b.title} book={b} />
         ))}
@@ -64,78 +64,44 @@ const Books: React.FC = () => {
 
 export default Books;
 
-// --- Internal: BookCard with tap-to-flip on touch + mobile buy options ---
+// --- Internal: BookCard using requested structure (hover rotate, click flip) ---
 const BookCard: React.FC<{ book: Book }> = ({ book: b }) => {
+  const [hovered, setHovered] = React.useState(false);
   const [flipped, setFlipped] = React.useState(false);
 
-  const onCardClick = () => setFlipped((f) => !f);
-
-  const stop = (e: React.MouseEvent) => e.stopPropagation();
+  const onFrontClick = (e: React.MouseEvent) => { e.stopPropagation(); setFlipped(true); };
+  const onBackClick = (e: React.MouseEvent) => { e.stopPropagation(); setFlipped(false); };
 
   return (
-    <div className="glass book-card w-full overflow-hidden" style={{ aspectRatio: '2 / 3' }}>
-      <div className="relative w-full h-full group cursor-pointer" style={{ perspective: '1000px' }} onClick={onCardClick}>
-        <div className="relative w-full h-full transition-transform duration-300 group-hover:[transform:rotateX(2deg)_rotateY(-2deg)_scale(1.02)]">
-        {/* FRONT */}
+    <div className="book-card no-spine mx-auto w-[220px] sm:w-[240px] md:w-[260px] lg:w-[280px]" style={{ aspectRatio: '2 / 3' }}>
+      <div className="book-shadow" />
+      <div className="perspective">
         <div
-          className="book-surface absolute inset-0 transition-transform duration-500 [backface-visibility:hidden] group-hover:[transform:rotateY(180deg)]"
-          style={flipped ? { transform: 'rotateY(180deg)' } : undefined}
+          className={`book-wrap ${hovered ? 'rotate' : ''} ${flipped ? 'flip' : ''}`}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         >
-          <img src={b.cover} alt={`${b.title} cover`} className="w-full h-full object-cover" style={{ borderRadius: 'inherit' }} />
-          {/* Extra-small overlay CTA (under 640px) */}
-          <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent sm:hidden">
-            <div className="mb-2"><span className="badge-glass">Tap to flip</span></div>
-            <a
-              href={b.amazon}
-              target="_blank"
-              rel="noreferrer noopener"
-              onClick={stop}
-              className="btn btn-amazon focus-ring inline-flex items-center gap-2 text-sm w-full justify-center"
-              aria-label={`Buy ${b.title} on Amazon`}
-            >
-              <SiAmazon size={16} /> Buy on Amazon
-            </a>
+          <div className="book" style={{ backgroundImage: `url(${b.cover})` }} onClick={onFrontClick} />
+          <div className="title"><span className="spine-text">{b.title}</span></div>
+          <div className="book-back" onClick={onBackClick}>
+            <div className="text">
+              <h3 className="text-xl font-semibold mb-2 text-slate-100">{b.title}</h3>
+              <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{b.desc}</p>
+            </div>
+            <div className="mt-auto pt-4 flex items-center justify-between gap-2">
+              <div className="text-xs text-slate-400">{b.tags.map((t) => `#${t}`).join(' ')}</div>
+              <a
+                href={b.amazon}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn btn-amazon focus-ring inline-flex items-center gap-2 text-sm"
+                aria-label={`Buy ${b.title} on Amazon`}
+              >
+                <SiAmazon size={16} /> Buy on Amazon
+              </a>
+            </div>
           </div>
         </div>
-
-        {/* BACK */}
-        <div
-          className="book-surface absolute inset-0 bg-black/60 p-5 flex flex-col transition-transform duration-500 [transform:rotateY(180deg)] [backface-visibility:hidden] group-hover:[transform:rotateY(0deg)]"
-          style={flipped ? { transform: 'rotateY(0deg)' } : undefined}
-        >
-          <h3 className="text-xl font-semibold mb-2 text-slate-100">{b.title}</h3>
-          <div className="text-sm text-slate-300 leading-relaxed overflow-auto pr-1">
-            {b.desc}
-          </div>
-          <div className="mt-auto pt-4 flex items-center justify-between gap-2">
-            <div className="text-xs text-slate-400">{b.tags.map((t) => `#${t}`).join(' ')}</div>
-            <a
-              href={b.amazon}
-              target="_blank"
-              rel="noreferrer noopener"
-              onClick={stop}
-              className="btn btn-amazon focus-ring inline-flex items-center gap-2 text-sm"
-              aria-label={`Buy ${b.title} on Amazon`}
-            >
-              <SiAmazon size={16} /> Buy on Amazon
-            </a>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      {/* Mobile-only secondary buy bar (640–767px) */}
-      <div className="hidden sm:flex md:hidden items-center justify-between mt-2">
-        <div className="text-slate-300 text-sm truncate pr-3">{b.title}</div>
-        <a
-          href={b.amazon}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="btn btn-amazon focus-ring inline-flex items-center gap-2 text-sm"
-          aria-label={`Buy ${b.title} on Amazon`}
-        >
-          <SiAmazon size={16} /> Buy
-        </a>
       </div>
     </div>
   );
